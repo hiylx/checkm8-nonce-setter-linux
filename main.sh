@@ -1,8 +1,5 @@
 #!/bin/bash
-rm -rf ipwndfu_public
-rm -rf ipwndfu
 
-clear
 echo "*** Matty's Checkm8 APNonce Setter ***"
 echo "Do you want to input a generator? (y,n)"
 
@@ -180,10 +177,8 @@ while true;
 do
     echo "Attempting to get into pwndfu mode"
     echo "Please just enter DFU mode again on each reboot"
-    echo "The script will run ipwndfu again and again until the device is in PWNDFU mode"
+    echo "The script will run gaster again and again until the device is in PWNDFU mode"
     ./gaster pwn && ./gaster reset && break
-    echo "Waiting 10 seconds to allow you to enter DFU mode"
-    sleep 10
 done
 
 sleep 3
