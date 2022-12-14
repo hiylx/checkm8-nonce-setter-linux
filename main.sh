@@ -159,6 +159,11 @@ fi
 
 if [ -z "$device" ]
 then
+    device=$(files/irecovery -q | grep PRODUCT | awk '{ print $2 }')
+fi
+
+if [ -z "$device" ]
+then
     echo "Either unsupported device or no device found."
     echo "Exiting.."
     exit
