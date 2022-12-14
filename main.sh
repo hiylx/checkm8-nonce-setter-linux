@@ -3,31 +3,31 @@
 echo "*** Matty's Checkm8 APNonce Setter ***"
 echo "Do you want to input a generator? (y,n)"
 
-read input
+read -r input
 
-if [ $input = y ];
+if [ "$input" = y ]
 then
     echo "Please enter your desiered generator."
 
-    read generator
+    read -r generator
 
     echo "Your generator is $generator"
-elif [ $input = n ];
+elif [ "$input" = n ]
 then
 
     echo "Please drag and drop the SHSH file that you want to downgrade with into this terminal window then press enter"
 
-    read shsh
+    read -r shsh
 
     echo "Is $shsh the correct location and file name of your SHSH? (y/n)"
 
-    read pass
+    read -r pass
 
-        if [ $pass == yes ] || [ $pass == Yes ] || [ $pass == y ] || [ $pass == Y ];
+        if [ "$pass" == yes ] || [ "$pass" == Yes ] || [ "$pass" == y ] || [ "$pass" == Y ]
         then
             echo "Continuing with given SHSH"
 
-        elif [ $pass == no ] || [ $pass == No ] || [ $pass == n ] || [ $pass == n ];
+        elif [ "$pass" == no ] || [ "$pass" == No ] || [ "$pass" == n ] || [ "$pass" == n ]
         then
             echo "Please restart script and give the correct location and file name"
             echo "Exiting..."
@@ -40,7 +40,7 @@ then
 
         fi
 
-        if [ ${shsh: -6} == ".shsh2" ] || [ ${shsh: -5} == ".shsh" ];
+        if [ "${shsh: -6}" == ".shsh2" ] || [ "${shsh: -5}" == ".shsh" ]
         then
             echo "File verified as SHSH2 file, continuing"
 
@@ -53,9 +53,9 @@ then
         echo "Getting generator from SHSH"
 
         getGenerator() {
-        echo $1 | grep "<string>0x" $shsh  | cut -c10-27
+        echo "$1" | grep "<string>0x" "$shsh" | cut -c10-27
         }
-        generator=$(getGenerator $shsh)
+        generator=$(getGenerator "$shsh")
 
         if [ -z "$generator" ]
         then
@@ -76,79 +76,73 @@ fi
 echo "$generator"
 
 
-files/ideviceinfo -s -k HardwareModel | grep -i 'n53ap' &> /dev/null
-if [ $? == 0 ]; then
+if files/ideviceinfo -s -k HardwareModel | grep -i 'n53ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone6,2"
    echo $device
 fi
 
-files/ideviceinfo -s -k HardwareModel | grep -i 'n51ap' &> /dev/null
-if [ $? == 0 ]; then
+if files/ideviceinfo -s -k HardwareModel | grep -i 'n51ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone6,1"
    echo $device
 fi
 
-files/ideviceinfo -s -k HardwareModel | grep -i 'j71ap' &> /dev/null
-if [ $? == 0 ]; then
+if files/ideviceinfo -s -k HardwareModel | grep -i 'j71ap' &> /dev/null; then
    echo "Supported Device"
    device="iPad4,1"
    echo $device
 fi
 
-files/ideviceinfo -s -k HardwareModel | grep -i 'j72ap' &> /dev/null
-if [ $? == 0 ]; then
+if files/ideviceinfo -s -k HardwareModel | grep -i 'j72ap' &> /dev/null; then
    echo "Supported Device"
    device="iPad4,2"
    echo $device
 fi
 
-files/ideviceinfo -s -k HardwareModel | grep -i 'j85ap' &> /dev/null
-if [ $? == 0 ]; then
+if files/ideviceinfo -s -k HardwareModel | grep -i 'j85ap' &> /dev/null; then
    echo "Supported Device"
    device="iPad4,4"
    echo $device
 fi
 
-files/ideviceinfo -s -k HardwareModel | grep -i 'j86ap' &> /dev/null
-if [ $? == 0 ]; then
+if files/ideviceinfo -s -k HardwareModel | grep -i 'j86ap' &> /dev/null; then
    echo "Supported Device"
    device="iPad4,5"
    echo $device
 fi
-files/ideviceinfo -s -k HardwareModel | grep -i 'd11ap' &> /dev/null
-if [ $? == 0 ]; then
+
+if files/ideviceinfo -s -k HardwareModel | grep -i 'd11ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone9,2"
    echo $device
 fi
-files/ideviceinfo -s -k HardwareModel | grep -i 'd10ap' &> /dev/null
-if [ $? == 0 ]; then
+
+if files/ideviceinfo -s -k HardwareModel | grep -i 'd10ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone9,1"
    echo $device
 fi
-files/ideviceinfo -s -k HardwareModel | grep -i 'd101ap' &> /dev/null
-if [ $? == 0 ]; then
+
+if files/ideviceinfo -s -k HardwareModel | grep -i 'd101ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone9,3"
    echo $device
 fi
-files/ideviceinfo -s -k HardwareModel | grep -i 'd111ap' &> /dev/null
-if [ $? == 0 ]; then
+
+if files/ideviceinfo -s -k HardwareModel | grep -i 'd111ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone9,4"
    echo $device
 fi
-files/ideviceinfo -s -k HardwareModel | grep -i 'd22ap' &> /dev/null
-if [ $? == 0 ]; then
+
+if files/ideviceinfo -s -k HardwareModel | grep -i 'd22ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone10,3"
    echo $device
 fi
-files/ideviceinfo -s -k HardwareModel | grep -i 'd221ap' &> /dev/null
-if [ $? == 0 ]; then
+
+if files/ideviceinfo -s -k HardwareModel | grep -i 'd221ap' &> /dev/null; then
    echo "Supported Device"
    device="iPhone10,6"
    echo $device
@@ -171,9 +165,9 @@ fi
 echo "Please connect device in DFU mode."
 
 echo "Starting gaster"
-cd files
+cd files || exit
 
-while true;
+while true
 do
     echo "Attempting to get into pwndfu mode"
     echo "Please just enter DFU mode again on each reboot"
@@ -189,7 +183,7 @@ echo "Entering PWNREC mode"
 
 ./irecovery -f ibss."$device".img4
 
-if [ $device = iPhone6,1 ] || [ $device = iPhone6,2 ] || [ $device = iPad4,1 ] || [ $device = iPad4,2 ] || [ $device = iPad4,3 ] || [ $device = iPad4,4 ] || [ $device = iPad4,5 ] || [ $device = iPad4,6 ] || [ $device = iPad4,7 ] || [ $device = iPad4,8 ] || [ $device = iPad4,9 ];
+if [ "$device" = iPhone6,1 ] || [ "$device" = iPhone6,2 ] || [ "$device" = iPad4,1 ] || [ "$device" = iPad4,2 ] || [ "$device" = iPad4,3 ] || [ "$device" = iPad4,4 ] || [ "$device" = iPad4,5 ] || [ "$device" = iPad4,6 ] || [ "$device" = iPad4,7 ] || [ "$device" = iPad4,8 ] || [ "$device" = iPad4,9 ]
 then
     ./irecovery -f ibec."$device".img4
 fi
