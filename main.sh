@@ -40,16 +40,6 @@ then
 
         fi
 
-        if [ "${shsh: -6}" == ".shsh2" ] || [ "${shsh: -5}" == ".shsh" ]
-        then
-            echo "File verified as SHSH2 file, continuing"
-
-        else
-            echo "Please ensure that the file extension is either .shsh or .shsh2 and retry"
-            echo "Exiting..."
-            exit
-        fi
-
         echo "Getting generator from SHSH"
 
         getGenerator() {
