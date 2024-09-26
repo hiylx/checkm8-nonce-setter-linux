@@ -1,4 +1,4 @@
-# checkm8-nonce-setter
+# checkm8-nonce-setter (FORKED FROM [qtlunya's repo](https://github.com/qtlunya/checkm8-nonce-setter-linux/))
 A nonce setter for devices compatible with checkm8
 
 -----------------------------------------
